@@ -12,21 +12,16 @@ import java.util.ArrayList;
 
 public class EntidadBancariaDAO {
 
+    ConnectionFactory connectionFactory = new ConnectionFactoryImpDataSource();
+    
     public EntidadBancaria read(int idEntidadBancaria) throws Exception {
-        //declaramos variable para el constructor para que se vea en toda el metodo
-        EntidadBancaria entidadBancaria;
-        //conectamos
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco", "root", "alumno");
-
-        //elegimos el select
+        Connection connection = connectionFactory.getConnection();
         String sql = "SELECT * FROM entidadbancaria WHERE id=?";
-        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, idEntidadBancaria);
-        //no usamos while, no gusta
         ResultSet rs = preparedStatement.executeQuery();
+        EntidadBancaria entidadBancaria;
         if (rs.next() == true) {
-            //decaramos variables bd
             idEntidadBancaria = rs.getInt("id");
             String codigoEntidad = rs.getString("codigoEntidad");
             String nombre = rs.getString("nombre");
@@ -35,14 +30,13 @@ public class EntidadBancariaDAO {
             if (rs.next() == true) {
                 throw new RuntimeException("Existe más de una EntidadBancaria:" + idEntidadBancaria);
             }
-            //constructor con las variables de la bd
             entidadBancaria = new EntidadBancaria(idEntidadBancaria, codigoEntidad, nombre, cif, TipoEntidadBancaria.valueOf(tipoEntidadBancaria));
         } else {
             RuntimeException runtimeException = new RuntimeException("No existe la entidad Bancaria" + idEntidadBancaria);
             throw runtimeException;
         }
         //cerramos la bd
-        conn.close();
+        connection.close();
         System.out.println("Se ha conectado!!");
         //devolvemos el resultado
         return entidadBancaria;
