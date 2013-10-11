@@ -13,10 +13,9 @@ import javax.sql.DataSource;
  *
  * @author alumno
  */
-public class ConnectionFactoryImplDataSource{
+public class ConnectionFactoryImpDataSource{
     Connection getConnection() throws Exception{
-        Context initContext = new
-        InitialContext();
+        Context initContext = new InitialContext();
         Context envContext  = (Context)initContext.lookup("java:/comp/env");
         DataSource datasource = (DataSource)envContext.lookup("jdbc/banco");
         Connection con = datasource.getConnection();

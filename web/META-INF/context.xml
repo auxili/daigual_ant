@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/daIgual"/>
-<Resource type="javax.sql.DataSource"
-            name="jbdc/banco"
-            driverClassName="com.mysql.jdbc.Driver"
-            url="jdbc:mysql://localhost:3306/banco"
-            username="root"
-            password="alumno"
-/>
+    <Context antiJARLocking="true" path="/daIgual">
+        <Resource   type="javax.sql.DataSource"
+                    auth="Container"
+                    name="jbdc/banco"
+                    driverClassName="com.mysql.jdbc.Driver"
+                    url="jdbc:mysql://localhost:3306/banco"
+                    username="root"
+                    password="alumno"
+                    maxActive="100"
+                    maxIdle="30"
+                    maxWait="10000"
+                    validationQuery="SELECT 1 FROM dual"
+        >    
+        </Resource>   
+    </Context>
