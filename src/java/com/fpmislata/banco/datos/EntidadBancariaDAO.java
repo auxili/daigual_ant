@@ -5,9 +5,10 @@ import java.util.List;
 
 
 public interface EntidadBancariaDAO extends GenericDAO<EntidadBancaria, Integer>{
-    abstract EntidadBancariaDAO read();
-    abstract EntidadBancariaDAO insert();
-    abstract EntidadBancariaDAO delete();
-    abstract List<EntidadBancaria> findAll();
-    abstract List<EntidadBancaria> findByCodigo();
+    public void read(int idEntidadBancaria);
+    public void insert(EntidadBancaria entidadBancaria);
+    public void update(EntidadBancaria entidadBancaria);
+    public void delete(int idEntidadBancaria);
+    public List<EntidadBancaria> findAll();
+    public List<EntidadBancaria> findByCodigo();
 }

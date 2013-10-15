@@ -16,13 +16,18 @@ import java.util.List;
  *
  * @author alumno
  */
+
+/*DUDA: el connectionFactory se hace para crear una NUEVA conectionFActoryImpDataSource o 
+ una NUEVA EntidadBancariaDAOImpJDBC ????????????????????????????????*/
+
 public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO{
     
     //abstract Connection getConnection();// cómo conectamos???
     ConnectionFactory connectionFactory = new ConnectionFactoryImpDataSource();
     
     @Override
-    public EntidadBancaria read(int idEntidadBancaria) throws Exception {
+    public EntidadBancaria read(int idEntidadBancaria){
+       try{
         EntidadBancaria entidadBancaria;
         Connection connection = connectionFactory.getConnection();
         String sql = "SELECT * FROM entidadbancaria WHERE id=?";
@@ -49,9 +54,13 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO{
         System.out.println("Se ha conectado!!");
         //devolvemos el resultado
         return entidadBancaria;
+       }catch(Exception ex){
+           throw new RuntimeException(ex);
+                   }
     }
 
-    public void insert(EntidadBancaria entidadBancaria) throws Exception {
+    public void insert(EntidadBancaria entidadBancaria){
+        try{
         Connection conn = connectionFactory.getConnection();
         String insertTableSQL = "INSERT INTO entidadbancaria"
                 + "(id, codigoEntidad, nombre, cif, tipoEntidadBancaria) VALUES"
@@ -66,10 +75,13 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO{
         System.out.println("Entrada insertada");
         conn.close();
         System.out.println("Se ha conectado!!");
+        }catch(Exception ex){
+           throw new RuntimeException(ex);
+                   }
     }
 
-    public void update(EntidadBancaria entidadBancaria) throws Exception {
-        //actualiza el nombre de la entidad 
+    public void update(EntidadBancaria entidadBancaria){
+        try{
         Connection conn = connectionFactory.getConnection();
         String updateTableSQL = "UPDATE FROM entidadbancaria SET nombre = ?  WHERE id = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(updateTableSQL);
@@ -79,9 +91,13 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO{
         preparedStatement.executeUpdate();
         conn.close();
         System.out.println("Se ha conectado!!");
+        }catch(Exception ex){
+           throw new RuntimeException(ex);
+                   }
     }
 
-    void delete(int idEntidadBancaria) throws Exception {
+    public void delete(int idEntidadBancaria){
+        try{
         Connection conn = connectionFactory.getConnection();
         String deleteSQL = "DELETE FROM entidadBancaria WHERE id = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(deleteSQL);
@@ -90,9 +106,13 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO{
         System.out.println("Entrada eliminada");
         conn.close();
         System.out.println("Se ha conectado!!");
+        }catch(Exception ex){
+           throw new RuntimeException(ex);
+                   }
     }
 
-    public List<EntidadBancaria> findAll() throws Exception{//eliminar la excepción y try catch + runtimeexception
+    public List<EntidadBancaria> findAll(){
+        try{
         List<EntidadBancaria> listaEntidades = new ArrayList<EntidadBancaria>();
         EntidadBancaria entidadBancaria;
         Connection conn = connectionFactory.getConnection();
@@ -113,9 +133,13 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO{
         conn.close();
         System.out.println("Se ha conectado!!");
         return listaEntidades;
+        }catch(Exception ex){
+           throw new RuntimeException(ex);
+                   }
     }
 
-    public List<EntidadBancaria> findByCodigo(String codigo) throws Exception {
+    public List<EntidadBancaria> findByCodigo(String codigo){
+        try{
         List<EntidadBancaria> listaEntidades = new ArrayList<EntidadBancaria>();
         EntidadBancaria entidadBancaria;
         Connection conn = connectionFactory.getConnection();
@@ -135,5 +159,8 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO{
         conn.close();
         System.out.println("Se ha conectado!!");
         return listaEntidades;
+        }catch(Exception ex){
+           throw new RuntimeException(ex);
+                   }
     }
 }
