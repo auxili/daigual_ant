@@ -12,10 +12,10 @@ import java.util.List;
  * @author alumno
  */
 public interface SucursalBancariaDAO implements GenericDAO<SucursalBancaria, Integer>{
-    public void read(int idSucursalBancaria);
+    /*public void read(int idSucursalBancaria);
     public void insert(SucursalBancaria sucursalBancaria);
     public void update(SucursalBancaria SucursalBancaria);
     public void delete(int idSucursalBancaria);
-    public List<SucursalBancaria> findAll();
+    public List<SucursalBancaria> findAll();*/
     public List<SucursalBancaria> findByCodigo(String Codigo);
 }

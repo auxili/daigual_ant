@@ -17,43 +17,28 @@ import javax.sql.DataSource;
  *
  * @author alumno
  */
-public class ConnectionFactoryImpDataSource implements ConnectionFactory{
-        @Override
-        public Connection getConnection(){
-        Context initContext = null;
-            try {
-                initContext = new InitialContext();
-            } catch (NamingException ex) {
-                Logger.getLogger(ConnectionFactoryImpDataSource.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        Context envContext = null;
-            try {
-                envContext = (Context)initContext.lookup("java:/comp/env");
-            } catch (NamingException ex) {
-                Logger.getLogger(ConnectionFactoryImpDataSource.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        DataSource datasource = null;
-            try {
-                datasource = (DataSource)envContext.lookup("jdbc/banco");
-            } catch (NamingException ex) {
-                Logger.getLogger(ConnectionFactoryImpDataSource.class.getName()).log(Level.SEVERE, null, ex);
-            }
+public class ConnectionFactoryImpDataSource implements ConnectionFactory {
+
+    @Override
+    public Connection getConnection() {
         Connection con = null;
-            try {
-                con = datasource.getConnection();
-            } catch (SQLException ex) {
-                Logger.getLogger(ConnectionFactoryImpDataSource.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        return con;
-   
-        /*public Connection getConnection() throws Exception{
-        Context initContext = new InitialContext();
-        Context envContext  = (Context)initContext.lookup("java:/comp/env");
-        DataSource datasource = (DataSource)envContext.lookup("jdbc/banco");
-        Connection con = datasource.getConnection();
-        return con;
-    */
-}
-    
-    
-}
+        try {
+            Context initContext=new InitialContext();;
+            Context envContext = (Context) initContext.lookup("java:comp/env");
+            DataSource datasource = (DataSource)envContext.lookup("jdbc/banco");
+            con = datasource.getConnection();
+            return con;
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+
+            /*public Connection getConnection() throws Exception{
+             Context initContext = new InitialContext();
+             Context envContext  = (Context)initContext.lookup("java:/comp/env");
+             DataSource datasource = (DataSource)envContext.lookup("jdbc/banco");
+             Connection con = datasource.getConnection();
+             return con;
+             */
+        }
+
+    }
+    }
