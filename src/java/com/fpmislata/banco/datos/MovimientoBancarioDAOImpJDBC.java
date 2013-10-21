@@ -3,9 +3,9 @@
  * and open the template in the editor.
  */
 package com.fpmislata.banco.datos;
-
-import com.fpmislata.banco.negocio.EntidadBancaria;
-import com.fpmislata.banco.negocio.TipoEntidadBancaria;
+import java.math.BigDecimal;
+import com.fpmislata.banco.negocio.MovimientoBancario;
+import com.fpmislata.banco.negocio.TipoMovimientoBancario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,63 +15,62 @@ import java.util.List;
 
 /**
  *
- * @author alumno
+ * @author KiKe
  */
-
-/*DUDA: el connectionFactory se hace para crear una NUEVA conectionFActoryImpDataSource o 
- una NUEVA EntidadBancariaDAOImpJDBC ????????????????????????????????*/
-public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
+public class MovimientoBancarioDAOImpJDBC implements EntidadBancariaDAO{
 
     //abstract Connection getConnection();// cómo conectamos???
     ConnectionFactory connectionFactory = new ConnectionFactoryImpDataSource();
 
     @Override
-    public EntidadBancaria read(Integer idEntidadBancaria) {
+    public MovimientoBancario read(Integer idMovimientoBancario) {
         try {
-            EntidadBancaria entidadBancaria;
+            MovimientoBancario movimientoBancario;
             Connection connection = connectionFactory.getConnection();
-            String sql = "SELECT * FROM entidadbancaria WHERE id=?";
+            String sql = "SELECT * FROM movimientoBancario WHERE idMovimientoBancario=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, idEntidadBancaria);
+            preparedStatement.setInt(1, idMovimientoBancario);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next() == true) {
-                idEntidadBancaria = rs.getInt("id");
-                String codigoEntidad = rs.getString("codigoEntidad");
-                String nombre = rs.getString("nombre");
-                String cif = rs.getString("cif");
-                String tipoEntidadBancaria = rs.getString("tipoEntidadBancaria");
+                idMovimientoBancario = rs.getInt("idMovimientoBancario");
+                BigDecimal importe = rs.getBigDecimal("importe");
+                String fecha = rs.getString("fecha");
+                BigDecimal saldoTotal = rs.getBigDecimal("saldoTotal");
+                String concepto = rs.getString("concepto");
+                String tipoMovimientoBancario = rs.getString("tipoMovimientoBancario");
                 if (rs.next() == true) {
-                    throw new RuntimeException("Existe más de una EntidadBancaria:" + idEntidadBancaria);
+                    throw new RuntimeException("Existe más de una MovimientoBancario:" + idMovimientoBancario);
                 }
-                entidadBancaria = new EntidadBancaria(idEntidadBancaria, codigoEntidad, nombre, cif, TipoEntidadBancaria.valueOf(tipoEntidadBancaria));
+                movimientoBancario = new MovimientoBancario(idMovimientoBancario, TipoMovimientoBancario.valueOf(tipoMovimientoBancario), importe, fecha, saldoTotal,concepto);
             } else {
-                RuntimeException runtimeException = new RuntimeException("No existe la entidad Bancaria" + idEntidadBancaria);
+                RuntimeException runtimeException = new RuntimeException("No existe el MovimientoBancario" + idMovimientoBancario);
                 throw runtimeException;
             }
             //cerramos la bd
             connection.close();
             System.out.println("Se ha conectado!!");
             //devolvemos el resultado
-            return entidadBancaria;
+            return movimientoBancario;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     @Override
-    public void insert(EntidadBancaria entidadBancaria) {
+    public void insert(MovimientoBancario movimientoBancario) {
         try {
             Connection conn = connectionFactory.getConnection();
             String insertTableSQL = "INSERT INTO entidadbancaria"
-                    + "(id, codigoEntidad, nombre, cif, tipoEntidadBancaria) VALUES"
-                    + "(?,?,?,?,?)";
+                    + "(idMovimientoBancario, importe, fecha, saldoTotal, concepto, tipoMovimientoBancario) VALUES"
+                    + "(?,?,?,?,?,?)";
             PreparedStatement preparedStatement = conn.prepareStatement(insertTableSQL);
-            preparedStatement.setInt(1, entidadBancaria.getId());
-            preparedStatement.setString(2, entidadBancaria.getCodigoEntidad());
-            preparedStatement.setString(3, entidadBancaria.getNombre());
-            preparedStatement.setString(4, entidadBancaria.getCif());
-            preparedStatement.setString(5, entidadBancaria.getTipoEntidadBancaria().name());
+            preparedStatement.setInt(1, movimientoBancario.getIdMovimientoBancario());
+            preparedStatement.setBigDecimal(2, movimientoBancario.getImporte());
+            preparedStatement.setString(3, movimientoBancario.getFecha());
+            preparedStatement.setBigDecimal(4, movimientoBancario.getSaldoTotal());
+            preparedStatement.setString(5, movimientoBancario.getConcepto());
+            preparedStatement.setString(6, movimientoBancario.getTipoMovimientoBancario().name());
             preparedStatement.executeUpdate();
             System.out.println("Entrada insertada");
             conn.close();
@@ -82,18 +81,17 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
     }
 
     @Override
-    public void update(EntidadBancaria entidadBancaria) {
+    public void update(MovimientoBancario movimientoBancario) {
         try {
             Connection conn = connectionFactory.getConnection();
-            String updateTableSQL = "UPDATE entidadbancaria SET codigoEntidad = ?, nombre = ?, cif = ?, tipoEntidadBancaria = ? WHERE id = ?";
+            String updateTableSQL = "UPDATE FROM entidadbancaria SET nombre = ?  WHERE id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(updateTableSQL);
-            preparedStatement.setString(1, entidadBancaria.getCodigoEntidad());
-            preparedStatement.setString(2, entidadBancaria.getNombre());
-            preparedStatement.setString(3, entidadBancaria.getCif());
-            preparedStatement.setString(4, entidadBancaria.getTipoEntidadBancaria().name());
-            preparedStatement.setInt(5, entidadBancaria.getIdEntidad());
+            preparedStatement.setString(1, "TriodosBank");
+            preparedStatement.setInt(2, entidadBancaria.getId());
+            // execute insert SQL stetement
             preparedStatement.executeUpdate();
             conn.close();
+            System.out.println("Se ha conectado!!");
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -228,4 +226,5 @@ public class EntidadBancariaDAOImpJDBC implements EntidadBancariaDAO {
             throw new RuntimeException(ex);
         }
     }
+}
 }

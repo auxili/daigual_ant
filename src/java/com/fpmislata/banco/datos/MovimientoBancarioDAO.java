@@ -11,11 +11,7 @@ import java.util.List;
  *
  * @author alumno
  */
-public interface MovimientoBancarioDAO implements GenericDAO<MovimientoBancario, Integer>{
-   /* public void read(int idSucursalBancaria);
-    public void insert(MovimientoBancario sucursalBancaria);
-    public void update(MovimientoBancario SucursalBancaria);
-    public void delete(int idSucursalBancaria);
-    public List<MovimientoBancario> findAll();*/
+public interface MovimientoBancarioDAO implements GenericDAO<MovimientoBancario,Integer>{
     public List<MovimientoBancario> findByCodigo(String Codigo);
+    public List<MovimientoBancario> findByNombre(String LetraNombre);
 }
