@@ -12,7 +12,6 @@ List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
 String nombre=request.getParameter("nombre");
 List<EntidadBancaria> entidadesBancarias1 = entidadBancariaDAO.findByNombre(nombre);
 
-
 %>
 <html>
     <head>
@@ -20,15 +19,17 @@ List<EntidadBancaria> entidadesBancarias1 = entidadBancariaDAO.findByNombre(nomb
     </head>
     <body>
         <div align="center"> 
+            <a href="nuevo.jsp">Insertar entidad bancaria</a>
+            <br>
             Entidad Bancaria 
- 
             Mostrar todas
-            <table><th>ID</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><tr>
-            <% for (EntidadBancaria entidadBancaria:entidadesBancarias){
-                %><td><%out.print(entidadBancaria.getId());%></td>
+            <table><th>ID</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><th>Elimina</th><tr>
+            <% for (EntidadBancaria entidadBancaria:entidadesBancarias){%>
+                <td><%out.print(entidadBancaria.getId());%></td>
                 <td><%out.print(entidadBancaria.getCif());%></td>
                 <td><%out.print(entidadBancaria.getNombre());%></td>
                 <td><%out.print(entidadBancaria.getTipoEntidadBancaria());%></td>
+                <td><a href="delete.jsp?id=<%= entidadBancaria.getId() %>">Borrar</a></td>
                 </tr>
                 <%
             } 
