@@ -13,7 +13,7 @@
     </head>
     <body>
         <form method="Get" action="insert.jsp">
-            Id:<input type="text" name="id"><br>
+            Id:<input type="text" name="id" ><br>
             Codigo<input type="text" name="codigoEntidad"><br>
             CIF:<input type="text" name="cif"><br>
             Nombre:<input type="text" name="nombre"> <br>

@@ -16,8 +16,8 @@ List<EntidadBancaria> entidadesBancarias1 = entidadBancariaDAO.findByNombre(nomb
 <html>
     <head>
         <title>EntidadBancaria</title>
-        <link href="bootstrap.css" rel="stylesheet" type="text/css">
-        <link href="bootstrap.js" rel="javascript" type="text/javascript">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="/js/bootstrap.js" rel="javascript" type="text/javascript">
     </head>
     <body>
         <div align="center"> 
@@ -25,7 +25,7 @@ List<EntidadBancaria> entidadesBancarias1 = entidadBancariaDAO.findByNombre(nomb
             <br>
             Entidad Bancaria 
             Mostrar todas
-            <table class="table-striped"><th>ID</th><th>Codigo</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><th>Elimina</th><th>Edita</th><tr>
+            <table class="table table-striped"><th>ID</th><th>Codigo</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><th>Elimina</th><th>Edita</th><tr>
             <% for (EntidadBancaria entidadBancaria:entidadesBancarias){%>
                 <td><%out.print(entidadBancaria.getId());%></td>
                 <td><%out.print(entidadBancaria.getCodigoEntidad());%></td>
@@ -45,7 +45,7 @@ List<EntidadBancaria> entidadesBancarias1 = entidadBancariaDAO.findByNombre(nomb
             Entidad Bancaria 
  
             Mostrar todas que contengan la letra a
-            <table><th>ID</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><tr>
+            <table class="table table-striped"><th>ID</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><tr>
             <% for (EntidadBancaria entidadBancaria:entidadesBancarias1){
                 %><td><%out.print(entidadBancaria.getId());%></td>
                 <td><%out.print(entidadBancaria.getCif());%></td>

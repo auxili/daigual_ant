@@ -37,7 +37,7 @@ List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
             Entidad Bancaria 
             <h1>ENTIDAD BANCARIA INSERTADA</h1>
             Mostrar todas
-            <table><th>ID</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><tr>
+            <table class="table table-striped"><th>ID</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><tr>
             <% for (EntidadBancaria entidadBancaria:entidadesBancarias){%>
                 <td><%out.print(entidadBancaria.getId());%></td>
                 <td><%out.print(entidadBancaria.getCif());%></td>
