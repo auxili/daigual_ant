@@ -16,20 +16,24 @@ List<EntidadBancaria> entidadesBancarias1 = entidadBancariaDAO.findByNombre(nomb
 <html>
     <head>
         <title>EntidadBancaria</title>
+        <link href="bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="bootstrap.js" rel="javascript" type="text/javascript">
     </head>
     <body>
         <div align="center"> 
-            <a href="nuevo.jsp">Insertar entidad bancaria</a>
+            <a href="readforinsert.jsp">Insertar entidad bancaria</a>
             <br>
             Entidad Bancaria 
             Mostrar todas
-            <table><th>ID</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><th>Elimina</th><tr>
+            <table class="table-striped"><th>ID</th><th>Codigo</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><th>Elimina</th><th>Edita</th><tr>
             <% for (EntidadBancaria entidadBancaria:entidadesBancarias){%>
                 <td><%out.print(entidadBancaria.getId());%></td>
+                <td><%out.print(entidadBancaria.getCodigoEntidad());%></td>
                 <td><%out.print(entidadBancaria.getCif());%></td>
                 <td><%out.print(entidadBancaria.getNombre());%></td>
                 <td><%out.print(entidadBancaria.getTipoEntidadBancaria());%></td>
                 <td><a href="delete.jsp?id=<%= entidadBancaria.getId() %>">Borrar</a></td>
+                <td><a href="readforupdate.jsp?id=<%= entidadBancaria.getId() %>">Editar</a></td>
                 </tr>
                 <%
             } 
