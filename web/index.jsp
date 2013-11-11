@@ -1,3 +1,4 @@
+<%@page import="com.fpmislata.banco.datos.EntidadBancariaDAOImpHibernate"%>
 <%@page import="com.fpmislata.banco.datos.EntidadBancariaDAOImpJDBC"%>
 <%@page import="javax.sound.midi.Soundbank"%>
 <%@page import="java.util.List"%>
@@ -6,7 +7,7 @@
 
 <%
 
-EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpJDBC();
+EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
 //EntidadBancaria entidadBancaria = entidadBancariaDAO.read(6);
 List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
 String nombre=request.getParameter("nombre");
