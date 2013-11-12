@@ -4,6 +4,7 @@
     Author     : alumno
 --%>
 
+<%@page import="com.fpmislata.banco.datos.EntidadBancariaDAOImpHibernate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -15,7 +16,7 @@
 
 <%
 
-EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpJDBC();
+EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
 String id = request.getParameter("id");
 Integer idEntidadBancaria = Integer.parseInt(id);
 entidadBancariaDAO.delete(idEntidadBancaria);

@@ -4,6 +4,7 @@
     Author     : alumno
 --%>
 
+<%@page import="com.fpmislata.banco.datos.EntidadBancariaDAOImpHibernate"%>
 <%@page import="com.fpmislata.banco.negocio.TipoEntidadBancaria"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
 <%@page import="com.fpmislata.banco.datos.EntidadBancariaDAO"%>
 
 <%
-EntidadBancariaDAOImpJDBC entidadBancariaDAO = new EntidadBancariaDAOImpJDBC();
+EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
 String id = request.getParameter("id");
 String codigoEntidad = request.getParameter("codigoEntidad");
 String cif = request.getParameter("cif");

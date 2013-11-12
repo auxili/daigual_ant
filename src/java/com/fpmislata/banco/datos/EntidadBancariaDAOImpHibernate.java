@@ -12,7 +12,7 @@ public class EntidadBancariaDAOImpHibernate extends GenericDAOImplHibernate<Enti
         Query query = session.createQuery("SELECT entidadBancaria FROM  WHERE idEntidadBancaria = ?");
         query.setString(0, Codigo);
         List list = query.list();
-        session.close();
+        //session.close(); //si no lo quitas, peta
         return list;
     }
 
@@ -22,7 +22,7 @@ public class EntidadBancariaDAOImpHibernate extends GenericDAOImplHibernate<Enti
         Query query = session.createQuery("SELECT entidadBancaria FROM EntidadBancaria entidadBancaria WHERE nombre like ?");
         query.setString(0, "%"+letraNombre+"%");
         List list = query.list();
-        session.close();
+        //session.close();
         return list;
     }   
 
