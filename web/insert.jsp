@@ -22,8 +22,11 @@ String codigoEntidad = request.getParameter("codigoEntidad");
 String cif = request.getParameter("cif");
 String nombre = request.getParameter("nombre");
 Integer idEntidadBancaria = Integer.parseInt(id);
+String tipoEntidadBancariaStr = request.getParameter("tipoEntidadBancaria");
+TipoEntidadBancaria tipoEntidadBancaria = TipoEntidadBancaria.valueOf(tipoEntidadBancariaStr);
 
-EntidadBancaria EntidadNueva = new EntidadBancaria(idEntidadBancaria, codigoEntidad, nombre, cif, TipoEntidadBancaria.Banco);
+
+EntidadBancaria EntidadNueva = new EntidadBancaria(idEntidadBancaria, codigoEntidad, nombre, cif, tipoEntidadBancaria);
 
 entidadBancariaDAO.insert(EntidadNueva);
 List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();

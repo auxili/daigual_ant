@@ -30,7 +30,7 @@ List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
             CIF:<input type="text" name="cif" value="<%out.print(entidadBancaria.getCif());%>"><br>
             Nombre:<input type="text" name="nombre" value="<%out.print(entidadBancaria.getNombre());%>"> <br>            
             
-            <select>
+            <select name="tipoEntidadBancaria">
                 <option selected>Elije entidad</option>
                 <option value="<%= TipoEntidadBancaria.CajaAhorro.name()%>">Caja de ahorros</option>
                 <option value="<%= TipoEntidadBancaria.Banco.name()%>">Banco</option>
