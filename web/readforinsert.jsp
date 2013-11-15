@@ -4,6 +4,7 @@
     Author     : alumno
 --%>
 
+<%@page import="com.fpmislata.banco.negocio.TipoEntidadBancaria"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,16 @@
             Codigo<input type="text" name="codigoEntidad"><br>
             CIF:<input type="text" name="cif"><br>
             Nombre:<input type="text" name="nombre"> <br>
-            <input type="submit">
+
+
+            <select>
+                <option selected>Elije entidad</option>
+                <option value="<%= TipoEntidadBancaria.CajaAhorro.name()%>">Caja de ahorros</option>
+                <option value="<%= TipoEntidadBancaria.Banco.name()%>">Banco</option>
+                <option value="<%= TipoEntidadBancaria.CoopCredito.name() %>">Cooperativa Credito</option>
+                <option value="<%= TipoEntidadBancaria.EstableFinanCredito.name() %>">Establ. Financiero</option>
+            </select>
+            <br/><input type="submit">
         </form>
     </body>
 </html>

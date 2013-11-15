@@ -1,3 +1,4 @@
+<%@page import="com.fpmislata.banco.datos.EntidadBancariaDAOImpHibernate"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page import="com.fpmislata.banco.negocio.TipoEntidadBancaria"%>
@@ -8,7 +9,7 @@
 <%@page import="com.fpmislata.banco.datos.EntidadBancariaDAO"%>
 
 <%
-EntidadBancariaDAOImpJDBC entidadBancariaDAO = new EntidadBancariaDAOImpJDBC();
+EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
 String id = request.getParameter("id");
 Integer idEntidadBancaria = Integer.parseInt(id);
 EntidadBancaria entidadBancaria = entidadBancariaDAO.read(idEntidadBancaria);
@@ -27,7 +28,16 @@ List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
             Id<input type="text" name="id" readonly="readonly" value="<%out.print(entidadBancaria.getId());%>"><br>
             Codigo<input type="text" name="codigoEntidad" value="<%out.print(entidadBancaria.getCodigoEntidad());%>"><br>
             CIF:<input type="text" name="cif" value="<%out.print(entidadBancaria.getCif());%>"><br>
-            Nombre:<input type="text" name="nombre" value="<%out.print(entidadBancaria.getNombre());%>"> <br>
+            Nombre:<input type="text" name="nombre" value="<%out.print(entidadBancaria.getNombre());%>"> <br>            
+            
+            <select>
+                <option selected>Elije entidad</option>
+                <option value="<%= TipoEntidadBancaria.CajaAhorro.name()%>">Caja de ahorros</option>
+                <option value="<%= TipoEntidadBancaria.Banco.name()%>">Banco</option>
+                <option value="<%= TipoEntidadBancaria.CoopCredito.name() %>">Cooperativa Credito</option>
+                <option value="<%= TipoEntidadBancaria.EstableFinanCredito.name() %>">Establ. Financiero</option>
+            </select>
+            
             <input type="submit">
         </form>
         
