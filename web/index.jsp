@@ -4,13 +4,9 @@
 <%@page import="java.util.List"%>
 <%@page import="com.fpmislata.banco.negocio.EntidadBancaria"%>
 <%@page import="com.fpmislata.banco.datos.EntidadBancariaDAO"%>
-
 <%
-
 EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
-//EntidadBancaria entidadBancaria = entidadBancariaDAO.read(6);
 List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
-String nombre=request.getParameter("nombre");
 %>
 <html>
     <head>
@@ -19,11 +15,8 @@ String nombre=request.getParameter("nombre");
         <link href="/js/bootstrap.js" rel="javascript" type="text/javascript">
     </head>
     <body>
-        <div align="center"> 
-            <a href="readforinsert.jsp">Insertar entidad bancaria</a>
-            <br>
-            Entidad Bancaria 
-            Mostrar todas
+        <div align="center" style="margin: 40px 50px;"> 
+            <h1>Entidades Bancarias</h1>
             <table class="table table-striped"><th>ID</th><th>Codigo</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><th>Elimina</th><th>Edita</th><tr>
             <% for (EntidadBancaria entidadBancaria:entidadesBancarias){%>
                 <td><%out.print(entidadBancaria.getId());%></td>
@@ -38,7 +31,8 @@ String nombre=request.getParameter("nombre");
             } 
             %>
             </table>
-            <br>
+            <a href="readforinsert.jsp">Insertar entidad bancaria</a>
+            <p><a href="buscar.jsp">Buscar Entidad Bancaria</a></p>
         </div>
     </body>
 </html>
