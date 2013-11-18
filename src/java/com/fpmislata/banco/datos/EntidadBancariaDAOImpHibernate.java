@@ -19,6 +19,10 @@ public class EntidadBancariaDAOImpHibernate extends GenericDAOImplHibernate<Enti
 
      @Override
     public List<EntidadBancaria> findByNombre(String letraNombre) {
+         //poner un if si letranombre = null, devolver ""
+        if (letraNombre==null){
+            letraNombre="";
+        }
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("SELECT entidadBancaria FROM EntidadBancaria entidadBancaria WHERE nombre like ?");
         query.setString(0, "%"+letraNombre+"%");
