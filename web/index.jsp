@@ -6,7 +6,8 @@
 <%@page import="com.fpmislata.banco.datos.EntidadBancariaDAO"%>
 <%
 EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
-List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
+String nombre = request.getParameter("nombre");
+List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findByNombre(nombre);
 %>
 <html>
     <head>
@@ -17,6 +18,11 @@ List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
     <body>
         <div align="center" style="margin: 40px 50px;"> 
             <h1>Entidades Bancarias</h1>
+            <form method="Get" action="index.jsp" class="form-search">
+                <input type="text" name="nombre">
+                <button type="submit" class="btn">Buscar</button>
+                </input>
+            </form>
             <table class="table table-striped"><th>ID</th><th>Codigo</th><th>CIF</th><th>NOMBRE</th><th>TIPO</th><th>Elimina</th><th>Edita</th><tr>
             <% for (EntidadBancaria entidadBancaria:entidadesBancarias){%>
                 <td><%out.print(entidadBancaria.getId());%></td>
@@ -32,7 +38,6 @@ List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
             %>
             </table>
             <a href="readforinsert.jsp">Insertar entidad bancaria</a>
-            <p><a href="buscar.jsp">Buscar Entidad Bancaria</a></p>
         </div>
     </body>
 </html>

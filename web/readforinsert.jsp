@@ -10,7 +10,7 @@
     </head>
     <body>
         <div id="contieneTabla" style="margin: 40px 100px">
-            <p>Inserte su entidad Bancaria nueva</p>
+            <h5>Inserte su entidad Bancaria nueva</h5>
             <form class="form-inline" method="Get" action="insert.jsp">
                 <input type="text" name="id" class="input-small" placeholder="IdEntidad"><br>
                 <input type="text" name="codigoEntidad" class="input-small" placeholder="Codigo"><br>
@@ -28,7 +28,6 @@
                 <br/><br/><input type="submit" class="btn">
             </form>
                 <p><a href="index.jsp">Inicio</a></p>
-                <p><a href="buscar.jsp">Buscar Entidad Bancaria</a></p>
         </div>
     </body>
 </html>

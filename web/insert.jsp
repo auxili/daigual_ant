@@ -49,7 +49,6 @@
                 %>
             </table>
             <p><a href="index.jsp">Inicio</a></p>
-            <p><a href="buscar.jsp">Buscar Entidad Bancaria</a></p>
         </div>
 
     </body>

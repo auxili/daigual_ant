@@ -24,7 +24,7 @@
     </head>
     <body>
         <div id="contieneTabla" style="margin: 40px 100px; width: 200px">
-            <p>Actualice la entidad Bancaria</p>
+            <h5>Actualice la entidad Bancaria</h5>
 
             <form method="Get" action="update.jsp">
                 <table class="table table-striped">
@@ -56,7 +56,6 @@
                 </table>
             </form>
             <p><a href="index.jsp">Inicio</a></p>
-            <p><a href="buscar.jsp">Buscar Entidad Bancaria</a></p>
         </div>
     </body>
 </html>
