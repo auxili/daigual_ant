@@ -49,18 +49,16 @@ CREATE TABLE IF NOT EXISTS `entidadbancaria` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla banco.entidadbancaria: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla banco.entidadbancaria: ~5 rows (aproximadamente)
 DELETE FROM `entidadbancaria`;
 /*!40000 ALTER TABLE `entidadbancaria` DISABLE KEYS */;
 INSERT INTO `entidadbancaria` (`id`, `codigoEntidad`, `nombre`, `cif`, `tipoEntidadBancaria`) VALUES
-	(1, '001', 'Banco Platas', '11223344', 'Banco'),
-	(2, '002', 'Bankinter', '22334455', 'Banco'),
-	(3, '003', 'Bancaja', '33445566', 'CajaAhorro'),
-	(4, '004', 'BBVA', '44556677', 'Banco'),
-	(5, '005', 'TriodosBank', '55667788', 'CoopCredito'),
-	(6, '006', 'Caja Rural', '66778899', 'CajaAhorro'),
-	(7, '007', 'La Caixa', '66554488', 'EstableFinanCredito'),
-	(8, '008', 'Santander', '87654123', 'Banco');
+	(1, '2323', 'entidad2', '321321321e', 'Banco'),
+	(3, '2343', 'entidad3', '654654654', 'Banco'),
+	(4, '2343', 'Bonco3', '654654654', 'Banco'),
+	(6, '654654', 'entidadInsertadaDAO', '9865498654', 'Banco'),
+	(8, '654654', 'entidadInsertadaDAO', '9865498654', 'Banco'),
+	(13, 'otroBanco', 'bancquisimo', 'superbanco', NULL);
 /*!40000 ALTER TABLE `entidadbancaria` ENABLE KEYS */;
 
 
