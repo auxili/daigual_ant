@@ -15,11 +15,11 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
      public void update (T t);
      public void delete (ID id);
      public List<T> findAll();*/
-
+    
     SessionFactory sessionFactory;
-
+    //@Autowired
     public GenericDAOImplHibernate(/*SessionFactory sessionFactory*/) {
-        this.sessionFactory = HibernateUtil.getSessionFactory();
+        this.sessionFactory = HibernateUtil.getSessionFactory();//una vez puesto el @Autowired sobra esta linea.
 
     }
 
@@ -115,12 +115,5 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
         return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    public List<EntidadBancaria> findByCodigo(String Codigo) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("SELECT entidadBancaria FROM  WHERE idEntidadBancaria = ?");
-        query.setString(0, Codigo);
-        List list = query.list();
-        //session.close(); //si no lo quitas, peta
-        return list;
-    }
+  
 }

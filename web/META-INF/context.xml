@@ -11,6 +11,6 @@
                     maxIdle="30"
                     maxWait="10000"
                     validationQuery="SELECT 1 FROM dual"
-        >    
+        >   
         </Resource>   
     </Context>

@@ -10,19 +10,23 @@
 
 <%
 EntidadBancariaDAOImpHibernate entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
-String id = request.getParameter("id");
+String id = request.getParameter("id"); 
 String codigoEntidad = request.getParameter("codigoEntidad");
 String cif = request.getParameter("cif");
 String nombre = request.getParameter("nombre");
-Integer idEntidadBancaria = Integer.parseInt(id);
+
 String tipoEntidadBancariaStr = request.getParameter("tipoEntidadBancaria");
 TipoEntidadBancaria tipoEntidadBancaria = TipoEntidadBancaria.valueOf(tipoEntidadBancariaStr);
 
-EntidadBancaria EntidadNueva = new EntidadBancaria(idEntidadBancaria, codigoEntidad, nombre, cif, tipoEntidadBancaria);
+Integer idEntidadBancaria = Integer.parseInt(id);
+//EntidadBancaria EntidadNueva = new EntidadBancaria(idEntidadBancaria, codigoEntidad, nombre, cif, tipoEntidadBancaria);
+EntidadBancaria entidadBancaria = entidadBancariaDAO.read(idEntidadBancaria);
 
-entidadBancariaDAO.update(EntidadNueva);
 
-List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
+
+entidadBancariaDAO.update(entidadBancaria);
+
+
 %>
 <!DOCTYPE html>
 <html>
