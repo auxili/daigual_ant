@@ -1,12 +1,10 @@
 package com.fpmislata.banco.negocio;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -15,8 +13,11 @@ import java.util.List;
 public class EntidadBancaria implements Serializable{
 
     private int idEntidad;
+    @Pattern(regexp="[0-9]{4}")
     private String codigoEntidad;
+    @Size(min=0,max=20)
     private String nombre;
+    @Pattern(regexp="[0-9]{8}[A-Z]{0,1}")
     private String cif;
     private TipoEntidadBancaria tipoEntidadBancaria;
     private List<SucursalBancaria> sucursalBancaria = new ArrayList();

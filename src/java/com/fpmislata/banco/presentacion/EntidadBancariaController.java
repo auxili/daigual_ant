@@ -13,6 +13,7 @@ import com.fpmislata.banco.negocio.EntidadBancaria;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,8 +61,8 @@ public class EntidadBancariaController {
         //EntidadBancaria entidadBancaria = new EntidadBancariaDAOImpHibernate();
         try {
             entidadBancariaDAO.delete(idEntidadBancaria);
-            
-            
+
+
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } catch (Exception ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
@@ -109,14 +110,23 @@ public class EntidadBancariaController {
 
             //obtener los datos
             entidadBancariaDAO.insert(entidadBancaria);
-            
+
             //cabeceras
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            
+
             //devolver los datos
             json = objectMapper.writeValueAsString(entidadBancaria);
             httpServletResponse.getWriter().println(json);
+            /*
+             *@validation: probamos la validacion por consola para luego hacerlo en su propia clase
+             */
+            /*
+        } catch (javax.validation.ConstraintViolationException cve) {
+            System.out.println("No se ha podido insertar la EntidadBancaria debido a los siguientes errores:");
+            for (ConstraintViolation constraintViolation : cve.getConstraintViolations()) {
+                System.out.println("En el campo '" + constraintViolation.getPropertyPath() + "':" + constraintViolation.getMessage());
+            }*/
         } catch (Exception ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -126,9 +136,10 @@ public class EntidadBancariaController {
             }
         }
     }
+
     @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}"}, method = RequestMethod.PUT)
     public void update(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria, @RequestBody String json) throws Exception {
-         try {
+        try {
             //transformamos el json a java
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
@@ -142,14 +153,14 @@ public class EntidadBancariaController {
             entidadBancariaUpdate.setCif(entidadBancaria.getCif());
             entidadBancariaUpdate.setSucursalBancaria(entidadBancaria.getSucursalBancaria());
             entidadBancariaUpdate.setTipoEntidadBancaria(entidadBancaria.getTipoEntidadBancaria());
-            
-            
+
+
             entidadBancariaDAO.update(entidadBancariaUpdate);
-            
+
             //cabeceras
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            
+
             //devolver los datos
             json = objectMapper.writeValueAsString(entidadBancariaUpdate);
             httpServletResponse.getWriter().println(json);

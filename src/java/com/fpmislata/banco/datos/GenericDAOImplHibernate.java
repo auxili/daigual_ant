@@ -92,6 +92,9 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
             session.beginTransaction();
             session.save(t);
             session.getTransaction().commit();
+        } catch (RuntimeException ex) {
+            session.getTransaction().rollback();
+            throw ex;  
         } catch (Exception ex) {
             session.getTransaction().rollback();
             throw new RuntimeException(ex);
