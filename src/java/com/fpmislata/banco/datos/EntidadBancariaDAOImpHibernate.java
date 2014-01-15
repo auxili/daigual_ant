@@ -6,8 +6,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 public class EntidadBancariaDAOImpHibernate extends GenericDAOImplHibernate<EntidadBancaria, Integer> implements EntidadBancariaDAO {
-     @Override
-     public List<EntidadBancaria> findByCodigo(String Codigo) {
+
+    @Override
+    public List<EntidadBancaria> findByCodigo(String Codigo) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("SELECT entidadBancaria FROM  WHERE idEntidadBancaria = ?");
         query.setString(0, Codigo);
@@ -16,19 +17,17 @@ public class EntidadBancariaDAOImpHibernate extends GenericDAOImplHibernate<Enti
         return list;
     }
 
-
-     @Override
+    @Override
     public List<EntidadBancaria> findByNombre(String letraNombre) {
-         //poner un if si letranombre = null, devolver ""
-        if (letraNombre==null){
-            letraNombre="";
+        //poner un if si letranombre = null, devolver ""
+        if (letraNombre == null) {
+            letraNombre = "";
         }
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("SELECT entidadBancaria FROM EntidadBancaria entidadBancaria WHERE nombre like ?");
-        query.setString(0, "%"+letraNombre+"%");
+        query.setString(0, "%" + letraNombre + "%");
         List list = query.list();
         //session.close();
         return list;
-    }   
-
+    }
 }
