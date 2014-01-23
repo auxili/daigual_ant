@@ -13,11 +13,11 @@ import javax.validation.constraints.Size;
 public class EntidadBancaria implements Serializable{
 
     private int idEntidad;
-    @Pattern(regexp="[0-9]{4}")
+    //@Pattern(regexp="[0-9]{4}")
     private String codigoEntidad;
-    @Size(min=0,max=20)
+    //@Size(min=0,max=20)
     private String nombre;
-    @Pattern(regexp="[0-9]{8}[A-Z]{0,1}")
+    //@Pattern(regexp="[0-9]{8}[A-Z]{0,1}")
     private String cif;
     private TipoEntidadBancaria tipoEntidadBancaria;
     private List<SucursalBancaria> sucursalBancaria = new ArrayList();
